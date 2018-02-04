@@ -12,7 +12,13 @@
 
 ## Local DynamoDB
 
-* To access DynamoDB running locally, use the --endpoint-url parameter. The following is an example of using the AWS CLI to list the tables in DynamoDB on your computer:
+* Start _Local_ DDB
+
+```shell
+java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+```
+
+* To access DynamoDB running locally, use the **--endpoint-url** parameter. The following is an example of using the **AWS CLI** to list the tables in DynamoDB on your computer:
 
 ```
 aws dynamodb list-tables --endpoint-url http://localhost:8000

@@ -10,13 +10,13 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 var table = "Movies";
 
 var year = 2013;
-// var title = "This Is the End";
+var title = "This Is the End";
 
 var params = {
   TableName: table,
   Key: {
-    year: year
-    // title: title
+    year: year,
+    title: title
   }
 };
 
