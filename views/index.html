@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="All the new list">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order List</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css" />
+    <link rel="stylesheet" type="text/css" href="jqGrid.bootstrap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-en.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="date_format.js"></script>
+    <style type="text/css">
+    p {
+        margin-top: 20px;
+    }
+    div.container {
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+        <p>
+            <button type="button" class="btn btn-primary" id="btnAdd">Add New Item</button>
+        </p>
+    </div>
+    <script type="text/javascript">
+    $(function($) {
+        $.get("https://kgng8eutc9.execute-api.us-west-2.amazonaws.com/orders", function(rdata) {
+            console.log(rdata);
+            $("#jqGrid").jqGrid({
+                data: rdata,
+                datatype: "local",
+                rowNum: 20,
+                colModel: [
+                    { label: 'OrderID', name: 'order_id', formatter: id_formatter },
+                    { label: 'Customer Name', name: 'customer_name' },
+                    { label: 'Credit Card', name: 'credit_card_info' },
+                    { label: 'Product ID', name: 'product_number' },
+                    { label: 'Address', name: 'shipping_address' },
+                    { label: 'Telephone', name: 'telephone_number' },
+                    { label: 'Location', name: 'location' },
+                    { label: 'Humidity', name: 'humidity' },
+                    { label: 'Temperature', name: 'temperature' },
+                    { label: 'Freshness', name: 'freshness' },
+                    { label: 'Date', name: 'date', formatter: date_formatter }
+                ],
+                shrinkToFit: false,
+                height: 'auto',
+                viewrecords: true,
+                iconSet: "fontAwesome",
+                guiStyle: "bootstrap",
+                idPrefix: "gb1_",
+                // rownumbers: true,
+                sortname: "date",
+                sortorder: "desc",
+                caption: "Order List",
+                pager: "#jqGridPager"
+            });
+        });
+
+        // id fomatter
+        function id_formatter(cellvalue, options, rowObject) {
+            // do something here
+            return "<a href='/detail/" + cellvalue + "' style='color:blue;text-decoration: underline;'>" + cellvalue + "</a>";
+        }
+
+        function date_formatter(cellvalue, options, rowObject) {
+            let dateTime = new Date(parseInt(cellvalue));
+            return dateTime.format(dateFormat.masks.isoDateTime2);
+        }
+
+        $("#btnAdd").click(function(event) {
+            window.location.href = "/new";
+        });
+    });
+    </script>
+</body>
+
+</html>

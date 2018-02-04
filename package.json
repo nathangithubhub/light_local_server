@@ -1,0 +1,24 @@
+{
+  "name": "aws_lambda",
+  "version": "1.0.0",
+  "description": "## Main files",
+  "main": "client_request.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.188.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.12",
+    "request": "^2.83.0",
+    "serverless-dynamodb-client": "0.0.2",
+    "serverless-dynamodb-local": "^0.2.27"
+  }
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Order Detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form action="new" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+                <label for="customer_name">Customer Name</label>
+                <input type="text" class="form-control" id="customer_name" name="customer_name" value="<%= customer_name %>">
+            </div>
+            <div class="form-group">
+                <label for="credit_card_info">Credit Card</label>
+                <input type="text" class="form-control" id="credit_card_info" name="credit_card_info" value="<%= credit_card_info %>">
+            </div>
+            <div class="form-group">
+                <label for="shipping_address">Shipping Address</label>
+                <input type="text" class="form-control" id="shipping_address" name="shipping_address" value="<%= shipping_address %>">
+            </div>
+            <div class="form-group">
+                <label for="telephone_number">Telephone Number</label>
+                <input type="text" class="form-control" id="telephone_number" name="telephone_number" value="<%= telephone_number %>">
+            </div>
+            <div class="form-group">
+                <label for="product_number">Product Number</label>
+                <input type="text" class="form-control" id="product_number" name="product_number" value="<%= product_number %>">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" value="<%= location %>">
+            </div>
+            <div class="form-group">
+                <label for="humidity">Humidity</label>
+                <input type="text" class="form-control" value="<%= humidity %>">
+            </div>
+            <div class="form-group">
+                <label for="temperature">Temperature</label>
+                <input type="text" class="form-control" value="<%= temperature %>">
+            </div>
+            <div class="form-group">
+                <label for="date_format">Created Date</label>
+                <input type="text" class="form-control" value="<%= date_format %>">
+            </div>
+            <button type="button" class="btn btn-primary">Return to List</button>
+        </form>
+        <script type="text/javascript">
+        $("input").prop('disabled', 'true');
+        $("button[type=button]").on('click', function(event) {
+            // event.preventDefault();
+            window.location.href = "/";
+            /* Act on the event */
+        });
+        </script>
+    </div>
+</body>
+
+</html>
