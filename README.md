@@ -1,16 +1,6 @@
 # Display product orders
 
-## Main files
-
-**server.js** : nodejs back-end code, used to call REST Apis and render template.
-
-**index.html** : display all the order list.
-
-**newItem.html** : create new order.
-
-**detail.ejs** : display detail information of an order.
-
-## Local DynamoDB
+## Local DynamoDB & CLI
 
 * Start _Local_ DDB
 
@@ -24,9 +14,9 @@ java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
 
-The AWS CLI can't use the downloadable version of DynamoDB as a default endpoint; therefore, you must specify **--endpoint-url** with each AWS CLI command.
+* The AWS CLI can't use the downloadable version of DynamoDB as a default endpoint; therefore, you must specify **--endpoint-url** with each AWS CLI command.
 
-* **Verify that the AWS CLI installed correctly by running aws --version.**
+* Verify that the AWS CLI installed correctly by running **aws --version.**
 
 ```
 $ aws --version
@@ -34,55 +24,55 @@ $ aws --version
   _aws-cli/1.11.84 Python/3.6.2 Linux/4.4.0-59-generic botocore/1.5.47_
 ```
 
-* **The AWS CLI is updated regularly to add support for new services and commands. To update to the latest version of the AWS CLI, run the installation command again.**
+* The AWS CLI is updated regularly to add support for new services and commands. To update to the latest version of the **AWS CLI**, run the installation command again.
 
 ```
 $ pip install awscli --upgrade --user
 ```
 
-* **If you need to uninstall the AWS CLI, use pip uninstall.**
+* If you need to uninstall the AWS CLI, use pip uninstall.
 
 ```
 $ pip uninstall awscli
 ```
 
-* **Create Table**
+* Create Table
 
   For example, the following command creates a table named Music. The partition key is Artist, and the sort key is SongTitle. (For easier readability, long commands in this section are broken into separate lines.)
 
-  ```
-  aws dynamodb create-table \
-      --table-name Music \
-      --attribute-definitions \
-          AttributeName=Artist,AttributeType=S \
-          AttributeName=SongTitle,AttributeType=S \
-      --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
-      --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
-      --endpoint-url http://localhost:8000
-  ```
+```
+aws dynamodb create-table \
+  --table-name Music \
+  --attribute-definitions \
+      AttributeName=Artist,AttributeType=S \
+      AttributeName=SongTitle,AttributeType=S \
+  --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
+  --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+  --endpoint-url http://localhost:8000
+```
 
-* **The following commands add new items to the table. These examples use a combination of shorthand syntax and JSON.**
+* The following commands add new items to the table. These examples use a combination of shorthand syntax and JSON.
 
 ```
 aws dynamodb put-item \
---table-name Music  \
+--table-name Music \
 --item \
-  '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
---return-consumed-capacity TOTAL  \
+ '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
+--return-consumed-capacity TOTAL \
 --endpoint-url http://localhost:8000
 
 aws dynamodb put-item \
---table-name Music  \
+--table-name Music \
 --item \
-  '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today 2"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
---return-consumed-capacity TOTAL  \
+ '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today 2"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
+--return-consumed-capacity TOTAL \
 --endpoint-url http://localhost:8000
 
 aws dynamodb put-item \
-  --table-name Music \
-  --item '{"Artist": {"S": "Acme Band"}, "SongTitle": {"S": "Happy Day"}, "AlbumTitle": {"S": "Songs About Life"} }' \
-  --return-consumed-capacity TOTAL \
-  --endpoint-url http://localhost:8000
+ --table-name Music \
+ --item '{"Artist": {"S": "Acme Band"}, "SongTitle": {"S": "Happy Day"}, "AlbumTitle": {"S": "Songs About Life"} }' \
+ --return-consumed-capacity TOTAL \
+ --endpoint-url http://localhost:8000
 ```
 
 ```
@@ -95,7 +85,7 @@ file:///home/gqq/MyProjects/nodejs/aws_lambda/queries/query_by_partition.json \
 --endpoint-url http://localhost:8000
 ```
 
-**describe table**
+* Some useful CLI commands **Describe Table**, **Table Count**
 
 ```
 aws dynamodb describe-table --table-name MusicCollection --endpoint-url http://localhost:8000
