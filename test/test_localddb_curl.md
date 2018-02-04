@@ -1,3 +1,5 @@
+**put one item**
+
 ```
 curl -v -X PUT \
  'http://localhost:5000/orders' \
@@ -10,6 +12,8 @@ curl -v -X PUT \
 "product_number": "222"
 }' | json_pp
 ```
+
+**get one order by order_id**
 
 ```
 curl -v -X GET 'http://localhost:5000/orders/222_7133885910390347' | json_pp
